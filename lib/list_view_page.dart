@@ -1,182 +1,105 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:json_dynamic_builder_list_view_example/router/app_router.gr.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
 @RoutePage()
-class ListViewPage extends StatefulWidget {
+class ListViewPage extends StatelessWidget {
   const ListViewPage({super.key});
-
-  @override
-  State<ListViewPage> createState() => _ListViewPageState();
-}
-
-class _ListViewPageState extends State<ListViewPage> {
-  @override
-  void initState() {
-    JsonWidgetRegistry.instance.registerFunctions(
-      {
-        'navigate': ({args, required registry}) => () {
-              final context = registry.navigatorKey?.currentContext;
-              if (context == null) return;
-
-              final id = args?[0];
-              if (id == null) return;
-
-              context.router.push(ListDetailRoute(id: id));
-            },
-      },
-    );
-
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    JsonWidgetRegistry.instance.removeValue('navigate');
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return JsonWidgetData.fromDynamic(
+      registry: JsonWidgetRegistry.instance,
       {
-        "type": "scaffold",
+        "type": "set_value",
         "args": {
-          "appBar": {
-            "type": "app_bar",
-            "args": {
-              "title": {
-                "type": "text",
-                "args": {"text": "List View"}
+          "values": {
+            "entries": {
+              "values": items,
+            },
+            "template": {
+              "type": "list_tile",
+              "args": {
+                "subtitle": {
+                  "type": "text",
+                  "listen": ["value"],
+                  "args": {"text": "\${value['subtitle']}"}
+                },
+                "title": {
+                  "type": "text",
+                  "listen": ["value"],
+                  "args": {"text": "\${value['title']}"}
+                },
+                "onTap": "\${navigate(value['url'])}",
               }
             }
           },
-          "body": {
-            "type": "list_view",
+          "child": {
+            "type": "scaffold",
             "args": {
-              "children": [
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "onTap": "\${navigate('1')}",
-                        "title": {
+              "appBar": {
+                "type": "app_bar",
+                "args": {
+                  "title": {
+                    "type": "row",
+                    "args": {
+                      "crossAxisAlignment": "start",
+                      "mainAxisAlignment": "start",
+                      "mainAxisSize": "min",
+                      "children": [
+                        {
                           "type": "text",
-                          "args": {"text": "One"}
+                          "args": {"text": "For Each ("}
                         },
-                        "subtitle": {
+                        {
                           "type": "text",
-                          "args": {"text": "This is the first item"}
+                          "args": {"text": "\${length(entries['values'])}"}
+                        },
+                        {
+                          "type": "text",
+                          "args": {"text": ")"}
                         }
-                      }
+                      ]
                     }
                   }
-                },
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "title": {
-                          "type": "text",
-                          "args": {"text": "Two"}
-                        },
-                        "subtitle": {
-                          "type": "text",
-                          "args": {"text": "This is the second item"}
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "title": {
-                          "type": "text",
-                          "args": {"text": "Three"}
-                        },
-                        "subtitle": {
-                          "type": "text",
-                          "args": {"text": "This is the third item"}
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "title": {
-                          "type": "text",
-                          "args": {"text": "Four"}
-                        },
-                        "subtitle": {
-                          "type": "text",
-                          "args": {"text": "This is the fourth item"}
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "title": {
-                          "type": "text",
-                          "args": {"text": "Five"}
-                        },
-                        "subtitle": {
-                          "type": "text",
-                          "args": {"text": "This is the fifth item"}
-                        }
-                      }
-                    }
-                  }
-                },
-                {
-                  "type": "card",
-                  "args": {
-                    "child": {
-                      "type": "list_tile",
-                      "args": {
-                        "title": {
-                          "type": "padding",
-                          "args": {
-                            "padding": "20",
-                            "child": {
-                              "type": "text",
-                              "args": {"text": "Six"}
-                            }
-                          }
-                        },
-                        "subtitle": {
-                          "type": "text",
-                          "args": {
-                            "text": "This is the sixth item with some padding",
-                          }
-                        }
-                      }
-                    }
-                  }
-                },
-              ]
+                }
+              },
+              "body": {
+                "type": "list_view",
+                "args": {
+                  "children": "\${for_each(entries['values'], 'template')}"
+                }
+              }
             }
           }
         }
       },
     ).build(context: context);
   }
+
+  List<Map<String, String>> get items => List.generate(
+        20,
+        (index) => _ListItem(
+          title: 'Item $index',
+          subtitle: 'This is item $index',
+          url: '/list-detail/$index',
+        ).toMap(),
+      );
+}
+
+class _ListItem {
+  final String title;
+  final String subtitle;
+  final String url;
+
+  _ListItem({
+    required this.title,
+    required this.subtitle,
+    required this.url,
+  });
+
+  Map<String, String> toMap() => {
+        "title": title,
+        "subtitle": subtitle,
+        "url": url,
+      };
 }
