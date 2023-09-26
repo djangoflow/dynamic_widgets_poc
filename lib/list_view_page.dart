@@ -1,7 +1,40 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:json_dynamic_builder_list_view_example/router/app_router.gr.dart';
 import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 
-class ListViewPage extends StatelessWidget {
+@RoutePage()
+class ListViewPage extends StatefulWidget {
   const ListViewPage({super.key});
+
+  @override
+  State<ListViewPage> createState() => _ListViewPageState();
+}
+
+class _ListViewPageState extends State<ListViewPage> {
+  @override
+  void initState() {
+    JsonWidgetRegistry.instance.registerFunctions(
+      {
+        'navigate': ({args, required registry}) => () {
+              final context = registry.navigatorKey?.currentContext;
+              if (context == null) return;
+
+              final id = args?[0];
+              if (id == null) return;
+
+              context.router.push(ListDetailRoute(id: id));
+            },
+      },
+    );
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    JsonWidgetRegistry.instance.removeValue('navigate');
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +61,7 @@ class ListViewPage extends StatelessWidget {
                     "child": {
                       "type": "list_tile",
                       "args": {
+                        "onTap": "\${navigate('1')}",
                         "title": {
                           "type": "text",
                           "args": {"text": "One"}
