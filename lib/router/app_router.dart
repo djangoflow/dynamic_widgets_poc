@@ -8,7 +8,7 @@ class AppRouter extends $AppRouter {
 
   @override
   List<AutoRoute> get routes => [
-        RedirectRoute(path: '/', redirectTo: '/theme'),
+        AutoRoute(page: HomeRoute.page, path: '/'),
         AutoRoute(page: ListViewRoute.page, path: '/list'),
         AutoRoute(page: ThemedJsonRoute.page, path: '/theme'),
         AutoRoute(page: ListDetailRoute.page, path: '/list-detail/:id'),
