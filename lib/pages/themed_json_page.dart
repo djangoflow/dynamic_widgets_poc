@@ -1,7 +1,9 @@
 import 'package:auto_route/annotations.dart';
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:json_dynamic_builder_list_view_example/blocs/dynamic_theme_cubit/dynamic_theme_cubit.dart';
+
+import '../blocs/json_theme_cubit/json_theme_cubit.dart';
 
 @RoutePage()
 class ThemedJsonPage extends StatelessWidget {
@@ -9,7 +11,8 @@ class ThemedJsonPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<DjangoflowDynamicThemeCubit>();
+    final appCubit = context.read<AppCubit>();
+    final jsonThemeCubit = context.read<DjangoflowJsonThemeCubit>();
 
     return Scaffold(
       appBar: AppBar(
@@ -19,8 +22,14 @@ class ThemedJsonPage extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         children: [
           ...<({String title, VoidCallback onTap})>[
-            (title: 'Load theme', onTap: cubit.loadTheme),
-            (title: 'Toggle Theme', onTap: cubit.toggleTheme),
+            (title: 'Load theme', onTap: jsonThemeCubit.loadData),
+            (
+              title: 'Toggle Theme',
+              onTap: () => appCubit.updateThemeMode(
+                  appCubit.state.themeMode == ThemeMode.dark
+                      ? ThemeMode.light
+                      : ThemeMode.dark)
+            ),
           ].map(
             (e) => Card(child: ListTile(onTap: e.onTap, title: Text(e.title))),
           ),

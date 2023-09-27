@@ -209,6 +209,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.3"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: "417e2a6f9d83ab396ec38ff4ea5da6c254da71e4db765ad737a42af6930140b7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.3.3"
+  djangoflow_app:
+    dependency: "direct main"
+    description:
+      name: djangoflow_app
+      sha256: f71706a62e87e2d69cfbd1cca66298cc2a7b689fd7772592cef1ea2fd74ba020
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.5.0"
   dynamic_widget_annotation:
     dependency: transitive
     description:
@@ -286,8 +302,18 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.3"
+  flutter_localizations:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   flutter_test:
     dependency: "direct dev"
+    description: flutter
+    source: sdk
+    version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.0"
@@ -563,6 +589,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  package_info_plus:
+    dependency: transitive
+    description:
+      name: package_info_plus
+      sha256: "6ff267fcd9d48cb61c8df74a82680e8b82e940231bb5f68356672fde0397334a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.1.0"
+  package_info_plus_platform_interface:
+    dependency: transitive
+    description:
+      name: package_info_plus_platform_interface
+      sha256: "9bc8ba46813a4cc42c66ab781470711781940780fd8beddd0c3da62506d3a6c6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.1"
   path:
     dependency: transitive
     description:
