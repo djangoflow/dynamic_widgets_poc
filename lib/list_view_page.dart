@@ -17,19 +17,35 @@ class ListViewPage extends StatelessWidget {
               "values": items,
             },
             "template": {
-              "type": "list_tile",
+              "type": "theme",
               "args": {
-                "subtitle": {
-                  "type": "text",
-                  "listen": ["value"],
-                  "args": {"text": "\${value['subtitle']}"}
+                "data": {
+                  "type": "theme_data",
+                  "args": {
+                    "listTileTheme": {
+                      "type": "list_tile_theme_data",
+                      "args": {
+                        "tileColor": {"type": "color"},
+                      }
+                    },
+                  }
                 },
-                "title": {
-                  "type": "text",
-                  "listen": ["value"],
-                  "args": {"text": "\${value['title']}"}
-                },
-                "onTap": "\${navigate(value['url'])}",
+                "child": {
+                  "type": "list_tile",
+                  "args": {
+                    "subtitle": {
+                      "type": "text",
+                      "listen": ["value"],
+                      "args": {"text": "\${value['subtitle']}"}
+                    },
+                    "title": {
+                      "type": "text",
+                      "listen": ["value"],
+                      "args": {"text": "\${value['title']}"}
+                    },
+                    "onTap": "\${navigate(value['url'])}",
+                  }
+                }
               }
             }
           },
@@ -48,7 +64,7 @@ class ListViewPage extends StatelessWidget {
                       "children": [
                         {
                           "type": "text",
-                          "args": {"text": "For Each ("}
+                          "args": {"text": "Dynamic List ("}
                         },
                         {
                           "type": "text",
@@ -76,12 +92,13 @@ class ListViewPage extends StatelessWidget {
     ).build(context: context);
   }
 
-  List<Map<String, String>> get items => List.generate(
+  List<Map<String, dynamic>> get items => List.generate(
         20,
         (index) => _ListItem(
           title: 'Item $index',
           subtitle: 'This is item $index',
           url: '/list-detail/$index',
+          color: "#F00",
         ).toMap(),
       );
 }
@@ -90,16 +107,19 @@ class _ListItem {
   final String title;
   final String subtitle;
   final String url;
+  final String color;
 
   _ListItem({
     required this.title,
     required this.subtitle,
     required this.url,
+    required this.color,
   });
 
-  Map<String, String> toMap() => {
+  Map<String, dynamic> toMap() => {
         "title": title,
         "subtitle": subtitle,
         "url": url,
+        "color": color,
       };
 }
