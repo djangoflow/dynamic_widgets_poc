@@ -8,23 +8,25 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i3;
-import 'package:flutter/material.dart' as _i4;
-import 'package:json_dynamic_builder_list_view_example/list_detail_page.dart'
+import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:flutter/material.dart' as _i5;
+import 'package:json_dynamic_builder_list_view_example/pages/list_detail_page.dart'
     as _i1;
-import 'package:json_dynamic_builder_list_view_example/list_view_page.dart'
+import 'package:json_dynamic_builder_list_view_example/pages/list_view_page.dart'
     as _i2;
+import 'package:json_dynamic_builder_list_view_example/pages/themed_json_page.dart'
+    as _i3;
 
-abstract class $AppRouter extends _i3.RootStackRouter {
+abstract class $AppRouter extends _i4.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i3.PageFactory> pagesMap = {
+  final Map<String, _i4.PageFactory> pagesMap = {
     ListDetailRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<ListDetailRouteArgs>(
           orElse: () => ListDetailRouteArgs(id: pathParams.getString('id')));
-      return _i3.AutoRoutePage<dynamic>(
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.ListDetailPage(
           key: args.key,
@@ -33,9 +35,15 @@ abstract class $AppRouter extends _i3.RootStackRouter {
       );
     },
     ListViewRoute.name: (routeData) {
-      return _i3.AutoRoutePage<dynamic>(
+      return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i2.ListViewPage(),
+      );
+    },
+    ThemedJsonRoute.name: (routeData) {
+      return _i4.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i3.ThemedJsonPage(),
       );
     },
   };
@@ -43,11 +51,11 @@ abstract class $AppRouter extends _i3.RootStackRouter {
 
 /// generated route for
 /// [_i1.ListDetailPage]
-class ListDetailRoute extends _i3.PageRouteInfo<ListDetailRouteArgs> {
+class ListDetailRoute extends _i4.PageRouteInfo<ListDetailRouteArgs> {
   ListDetailRoute({
-    _i4.Key? key,
+    _i5.Key? key,
     required String id,
-    List<_i3.PageRouteInfo>? children,
+    List<_i4.PageRouteInfo>? children,
   }) : super(
           ListDetailRoute.name,
           args: ListDetailRouteArgs(
@@ -60,8 +68,8 @@ class ListDetailRoute extends _i3.PageRouteInfo<ListDetailRouteArgs> {
 
   static const String name = 'ListDetailRoute';
 
-  static const _i3.PageInfo<ListDetailRouteArgs> page =
-      _i3.PageInfo<ListDetailRouteArgs>(name);
+  static const _i4.PageInfo<ListDetailRouteArgs> page =
+      _i4.PageInfo<ListDetailRouteArgs>(name);
 }
 
 class ListDetailRouteArgs {
@@ -70,7 +78,7 @@ class ListDetailRouteArgs {
     required this.id,
   });
 
-  final _i4.Key? key;
+  final _i5.Key? key;
 
   final String id;
 
@@ -82,8 +90,8 @@ class ListDetailRouteArgs {
 
 /// generated route for
 /// [_i2.ListViewPage]
-class ListViewRoute extends _i3.PageRouteInfo<void> {
-  const ListViewRoute({List<_i3.PageRouteInfo>? children})
+class ListViewRoute extends _i4.PageRouteInfo<void> {
+  const ListViewRoute({List<_i4.PageRouteInfo>? children})
       : super(
           ListViewRoute.name,
           initialChildren: children,
@@ -91,5 +99,19 @@ class ListViewRoute extends _i3.PageRouteInfo<void> {
 
   static const String name = 'ListViewRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i3.ThemedJsonPage]
+class ThemedJsonRoute extends _i4.PageRouteInfo<void> {
+  const ThemedJsonRoute({List<_i4.PageRouteInfo>? children})
+      : super(
+          ThemedJsonRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'ThemedJsonRoute';
+
+  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
 }
