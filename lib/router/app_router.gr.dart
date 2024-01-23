@@ -8,59 +8,81 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'package:auto_route/auto_route.dart' as _i5;
-import 'package:flutter/material.dart' as _i6;
-import 'package:json_dynamic_builder_list_view_example/pages/home_page.dart'
+import 'package:auto_route/auto_route.dart' as _i6;
+import 'package:flutter/material.dart' as _i7;
+import 'package:json_dynamic_builder_list_view_example/pages/custom_list_view_page.dart'
     as _i1;
-import 'package:json_dynamic_builder_list_view_example/pages/list_detail_page.dart'
+import 'package:json_dynamic_builder_list_view_example/pages/home_page.dart'
     as _i2;
-import 'package:json_dynamic_builder_list_view_example/pages/list_view_page.dart'
+import 'package:json_dynamic_builder_list_view_example/pages/list_detail_page.dart'
     as _i3;
-import 'package:json_dynamic_builder_list_view_example/pages/themed_json_page.dart'
+import 'package:json_dynamic_builder_list_view_example/pages/list_view_page.dart'
     as _i4;
+import 'package:json_dynamic_builder_list_view_example/pages/themed_json_page.dart'
+    as _i5;
 
-abstract class $AppRouter extends _i5.RootStackRouter {
+abstract class $AppRouter extends _i6.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i5.PageFactory> pagesMap = {
-    HomeRoute.name: (routeData) {
-      return _i5.AutoRoutePage<dynamic>(
+  final Map<String, _i6.PageFactory> pagesMap = {
+    CustomListViewRoute.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.HomePage(),
+        child: const _i1.CustomListViewPage(),
+      );
+    },
+    HomeRoute.name: (routeData) {
+      return _i6.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i2.HomePage(),
       );
     },
     ListDetailRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<ListDetailRouteArgs>(
           orElse: () => ListDetailRouteArgs(id: pathParams.getString('id')));
-      return _i5.AutoRoutePage<dynamic>(
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.ListDetailPage(
+        child: _i3.ListDetailPage(
           key: args.key,
           id: args.id,
         ),
       );
     },
     ListViewRoute.name: (routeData) {
-      return _i5.AutoRoutePage<dynamic>(
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.ListViewPage(),
+        child: const _i4.ListViewPage(),
       );
     },
     ThemedJsonRoute.name: (routeData) {
-      return _i5.AutoRoutePage<dynamic>(
+      return _i6.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.ThemedJsonPage(),
+        child: const _i5.ThemedJsonPage(),
       );
     },
   };
 }
 
 /// generated route for
-/// [_i1.HomePage]
-class HomeRoute extends _i5.PageRouteInfo<void> {
-  const HomeRoute({List<_i5.PageRouteInfo>? children})
+/// [_i1.CustomListViewPage]
+class CustomListViewRoute extends _i6.PageRouteInfo<void> {
+  const CustomListViewRoute({List<_i6.PageRouteInfo>? children})
+      : super(
+          CustomListViewRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'CustomListViewRoute';
+
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i2.HomePage]
+class HomeRoute extends _i6.PageRouteInfo<void> {
+  const HomeRoute({List<_i6.PageRouteInfo>? children})
       : super(
           HomeRoute.name,
           initialChildren: children,
@@ -68,16 +90,16 @@ class HomeRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'HomeRoute';
 
-  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i2.ListDetailPage]
-class ListDetailRoute extends _i5.PageRouteInfo<ListDetailRouteArgs> {
+/// [_i3.ListDetailPage]
+class ListDetailRoute extends _i6.PageRouteInfo<ListDetailRouteArgs> {
   ListDetailRoute({
-    _i6.Key? key,
+    _i7.Key? key,
     required String id,
-    List<_i5.PageRouteInfo>? children,
+    List<_i6.PageRouteInfo>? children,
   }) : super(
           ListDetailRoute.name,
           args: ListDetailRouteArgs(
@@ -90,8 +112,8 @@ class ListDetailRoute extends _i5.PageRouteInfo<ListDetailRouteArgs> {
 
   static const String name = 'ListDetailRoute';
 
-  static const _i5.PageInfo<ListDetailRouteArgs> page =
-      _i5.PageInfo<ListDetailRouteArgs>(name);
+  static const _i6.PageInfo<ListDetailRouteArgs> page =
+      _i6.PageInfo<ListDetailRouteArgs>(name);
 }
 
 class ListDetailRouteArgs {
@@ -100,7 +122,7 @@ class ListDetailRouteArgs {
     required this.id,
   });
 
-  final _i6.Key? key;
+  final _i7.Key? key;
 
   final String id;
 
@@ -111,9 +133,9 @@ class ListDetailRouteArgs {
 }
 
 /// generated route for
-/// [_i3.ListViewPage]
-class ListViewRoute extends _i5.PageRouteInfo<void> {
-  const ListViewRoute({List<_i5.PageRouteInfo>? children})
+/// [_i4.ListViewPage]
+class ListViewRoute extends _i6.PageRouteInfo<void> {
+  const ListViewRoute({List<_i6.PageRouteInfo>? children})
       : super(
           ListViewRoute.name,
           initialChildren: children,
@@ -121,13 +143,13 @@ class ListViewRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'ListViewRoute';
 
-  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }
 
 /// generated route for
-/// [_i4.ThemedJsonPage]
-class ThemedJsonRoute extends _i5.PageRouteInfo<void> {
-  const ThemedJsonRoute({List<_i5.PageRouteInfo>? children})
+/// [_i5.ThemedJsonPage]
+class ThemedJsonRoute extends _i6.PageRouteInfo<void> {
+  const ThemedJsonRoute({List<_i6.PageRouteInfo>? children})
       : super(
           ThemedJsonRoute.name,
           initialChildren: children,
@@ -135,5 +157,5 @@ class ThemedJsonRoute extends _i5.PageRouteInfo<void> {
 
   static const String name = 'ThemedJsonRoute';
 
-  static const _i5.PageInfo<void> page = _i5.PageInfo<void>(name);
+  static const _i6.PageInfo<void> page = _i6.PageInfo<void>(name);
 }

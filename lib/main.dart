@@ -8,6 +8,7 @@ import 'package:json_dynamic_widget/json_dynamic_widget.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'blocs/json_theme_cubit/json_theme_cubit.dart';
+import 'widgets/custom_list_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,9 +22,38 @@ void main() async {
   GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   JsonWidgetRegistry.instance.navigatorKey = navigatorKey;
-
+  JsonWidgetRegistry.instance.registerCustomBuilders(
+    {
+      CustomListViewBuilder.kType: const JsonWidgetBuilderContainer(
+        builder: CustomListViewBuilder.fromDynamic,
+      ),
+    },
+  );
   JsonWidgetRegistry.instance.registerFunctions(
     {
+      'onItemTap': ({args, required registry}) => (String value) {
+            print('######## Printing args: #########');
+            print(args);
+            print('######## Printing value: #########');
+            print(value);
+            final variableName = args?[0];
+            registry.setValue(variableName, value);
+          },
+      // 'itemBuilder': ({args, required registry}) =>
+      //     (BuildContext context, int index) {
+      //       print('######## Printing args: #########');
+      //       print(args);
+      //       print('######## Printing Index: #########');
+      //       print(index);
+      //       print(index.runtimeType);
+      //       return ListTile(
+      //         title: Text('Item $index'),
+      //         subtitle: Text('This is item $index'),
+      //         onTap: () {
+      //           print('Tapped here lala');
+      //         },
+      //       );
+      //     },
       'navigate': ({args, required registry}) => () {
             final context = navigatorKey.currentContext;
             if (context == null) return;
