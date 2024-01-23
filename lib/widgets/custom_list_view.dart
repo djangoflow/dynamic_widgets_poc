@@ -17,7 +17,7 @@ abstract class _CustomListViewBuilder extends JsonWidgetBuilder {
 
 class CustomListView extends StatelessWidget {
   const CustomListView({super.key, required this.onListItemTap});
-  final Function(String value) onListItemTap;
+  final Function(Map<String, dynamic> value) onListItemTap;
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -26,7 +26,10 @@ class CustomListView extends StatelessWidget {
         return ListTile(
           title: Text('Title $index'),
           subtitle: Text('Subtitle $index'),
-          onTap: () => onListItemTap('$index'),
+          onTap: () => onListItemTap({
+            "index": index,
+            "title": "Title $index",
+          }),
         );
       },
     );

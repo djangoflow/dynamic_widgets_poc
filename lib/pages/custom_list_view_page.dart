@@ -13,7 +13,10 @@ class CustomListViewPage extends StatelessWidget {
         "type": "set_value",
         "args": {
           "values": {
-            "indexNumber": 0,
+            "indexNumber": {
+              "index": 0,
+              "title": "Title 0",
+            },
           },
           "child": {
             "type": "scaffold",
@@ -36,7 +39,7 @@ class CustomListViewPage extends StatelessWidget {
                     {
                       "type": "text",
                       "listen": ["indexNumber"],
-                      "args": {"text": "\${indexNumber}"}
+                      "args": {"text": "\${indexNumber['index']}"}
                     }
                   ]
                 }

@@ -94,7 +94,7 @@ class JsonCustomListView extends JsonWidgetData {
           jsonWidgetType: CustomListViewBuilder.kType,
         );
 
-  final dynamic Function(String) onListItemTap;
+  final dynamic Function(Map<String, dynamic>) onListItemTap;
 }
 
 class CustomListViewBuilderModel extends JsonWidgetBuilderModel {
@@ -103,7 +103,7 @@ class CustomListViewBuilderModel extends JsonWidgetBuilderModel {
     required this.onListItemTap,
   });
 
-  final dynamic Function(String) onListItemTap;
+  final dynamic Function(Map<String, dynamic>) onListItemTap;
 
   static CustomListViewBuilderModel fromDynamic(
     dynamic map, {

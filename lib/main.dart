@@ -31,7 +31,7 @@ void main() async {
   );
   JsonWidgetRegistry.instance.registerFunctions(
     {
-      'onItemTap': ({args, required registry}) => (String value) {
+      'onItemTap': ({args, required registry}) => (Map<String, dynamic> value) {
             print('######## Printing args: #########');
             print(args);
             print('######## Printing value: #########');
