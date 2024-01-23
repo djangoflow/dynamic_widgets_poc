@@ -38,6 +38,7 @@ void main() async {
             print(value);
             final variableName = args?[0];
             registry.setValue(variableName, value);
+            print(registry.getValue(variableName));
           },
       // 'itemBuilder': ({args, required registry}) =>
       //     (BuildContext context, int index) {

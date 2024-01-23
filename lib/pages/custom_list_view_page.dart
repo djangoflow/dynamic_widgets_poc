@@ -10,33 +10,40 @@ class CustomListViewPage extends StatelessWidget {
     return JsonWidgetData.fromDynamic(
       registry: JsonWidgetRegistry.instance,
       {
-        "type": "scaffold",
+        "type": "set_value",
         "args": {
-          "body": {
-            "type": "column",
+          "values": {
+            "indexNumber": 0,
+          },
+          "child": {
+            "type": "scaffold",
             "args": {
-              "children": [
-                {
-                  "type": "expanded",
-                  "args": {
-                    "child": {
-                      "type": "custom_list_view",
+              "body": {
+                "type": "column",
+                "args": {
+                  "children": [
+                    {
+                      "type": "expanded",
                       "args": {
-                        "onListItemTap": "\${onItemTap('indexNumber')}",
-                        "itemBuilder": "\${itemBuilder('context', 'index')}",
+                        "child": {
+                          "type": "custom_list_view",
+                          "args": {
+                            "onListItemTap": r"${onItemTap('indexNumber')}",
+                          }
+                        },
                       }
                     },
-                  }
-                },
-                // {
-                //   "listen": ["indexNumber"],
-                //   "type": "text",
-                //   "args": {"text": r"This is a text widget ${indexNumber}"}
-                // }
-              ]
+                    {
+                      "type": "text",
+                      "listen": ["indexNumber"],
+                      "args": {"text": "\${indexNumber}"}
+                    }
+                  ]
+                }
+              }
             }
           }
-        }
+        },
       },
     ).build(context: context);
   }
